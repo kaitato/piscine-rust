@@ -14,8 +14,8 @@ mod tests {
     #[test]
     fn it_works() {
         let celsius = fahrenheit_to_celsius(-459.67);
-        assert_eq!(celsius, -273.15);
+        assert_eq!(celsius, -273.15)
         let fahrenheit = celsius_to_fahrenheit(0.0);
-        assert_eq!(fahrenheit, 32.0);
+        assert_eq!(fahrenheit, 32.0)
     }
 }
