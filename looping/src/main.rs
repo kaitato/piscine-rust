@@ -2,7 +2,7 @@ use std::io;
 
 fn main() {
     let secret_answer: String = String::from("The letter e");
-    let mut num_of_tries = 0;
+    let mut num_of_tries = 1;
     loop {
         println!("I am the beginning of the end, and the end of time and space. I am essential to creation, and I surround every place. What am I?");
         let mut input = String::new();
