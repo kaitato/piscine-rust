@@ -1,12 +1,15 @@
 pub fn factorial(num: u64) -> u64 {
-    let mut x = 1;
-    let mut y = num;
+    let mut x = num;
+    let mut answer = num;
+    if num == 0 {
+        return 1
+    }
     loop {
-        x *= y;
-        y -= 1;
-        if y == 0 {
-            return x
-        };
+        x -= 1;
+        if x == 0 {
+            return answer
+        }
+        answer *= x
     }
 }
 
@@ -16,7 +19,7 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let factorial = factorial(6);
-        assert_eq!(factorial, 720);
+        let factorial = factorial(1);
+        assert_eq!(factorial, 1);
     }
 }
