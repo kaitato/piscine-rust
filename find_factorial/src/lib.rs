@@ -4,7 +4,7 @@ pub fn factorial(num: u64) -> u64 {
     loop {
         x *= y;
         y -= 1;
-        if y == 1 {
+        if y == 0 {
             return x
         };
     }
