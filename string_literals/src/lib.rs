@@ -30,13 +30,7 @@ pub fn split_at(v: &str, index: usize) -> (&str, &str) {
 }
 
 pub fn find(v: &str, pat: char) -> usize {
-    let mut counter = 0;
-    for a in v.chars() {
-        if a == pat {
-            counter += 1;
-        }
-    }
-    counter
+    v.chars().position(|v| v == pat).unwrap()
 }
 
 // #[cfg(test)]
