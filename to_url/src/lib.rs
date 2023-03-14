@@ -1,22 +1,24 @@
-pub fn to_url(s: &str) -> String {
-    let bytes = s.as_bytes();
+pub fn to_url(s: &str) -> String  {
+    // let bytes = s.as_bytes();
+    let mut string = String:: from("");
+    for a in s.chars() {
+        if a == ' ' {
+            string.push_str("%20");
+        } else {
+            string.push(a);
 
-    for (i, &item) in bytes.iter().enumerate() {
-        if item == b' ' {
-            return (&s[0..i]).to_string();
         }
     }
-
-    s[..].to_string()
+    string
 }
 
-// #[cfg(test)]
-// mod tests {
-//     use super::*;
+#[cfg(test)]
+mod tests {
+    use super::*;
 
-//     #[test]
-//     fn it_works() {
-//         let result = add(2, 2);
-//         assert_eq!(result, 4);
-//     }
-// }
+    #[test]
+    fn it_works() {
+        
+        let s = "Hello, world!";
+        println!("{} to be use as an url is {}", s, to_url(s));    }
+}
