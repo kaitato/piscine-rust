@@ -1,19 +1,25 @@
 pub fn first_subword(s: String) -> String {
     let mut subword = String::new();
-    for char in s.chars() {
-        // let mut uppercase = char.to_uppercase();
-        // println!("{}",);
-        if char.is_uppercase() && char != s.chars().nth(0).unwrap(){
-            
-            return subword
+    let mut chars = s.chars().peekable();
+
+    while let Some(&c) = chars.peek() {
+        if c.is_uppercase() && subword.is_empty() {
+            subword.push(c.to_ascii_lowercase());
+            chars.next();
+        } else if c.is_uppercase() {
+            break;
+        } else if c == '_' {
+            chars.next();
+            break;
+        } else {
+            subword.push(c);
+            chars.next();
         }
-        if char == '_' {
-            return subword
-        }
-        subword.push(char);
     }
-    s
+
+    subword
 }
+
 
 #[cfg(test)]
 mod tests {
