@@ -4,7 +4,7 @@ pub fn first_subword(s: String) -> String {
 
     while let Some(&c) = chars.peek() {
         if c.is_uppercase() && subword.is_empty() {
-            subword.push(c.to_ascii_lowercase());
+            subword.push(c);
             chars.next();
         } else if c.is_uppercase() {
             break;
