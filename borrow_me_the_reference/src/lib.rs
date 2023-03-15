@@ -9,17 +9,24 @@ pub fn delete_and_backspace(s: &mut String) {
             skip_next_char = false;
             continue;
         }
-        match c {
-            '-' => {
-                chars.pop();
-            },
-            '+' => {
-                skip_next_char = true;
-            },
-            _ => {
-                chars.push(c);
-            }
+        if c == '-' {
+            chars.pop();
+        } else if c == '+' {
+            skip_next_char = true;
+        } else {
+            chars.push(c);
         }
+        // match c {
+        //     '-' => {
+        //         chars.pop();
+        //     },
+        //     '+' => {
+        //         skip_next_char = true;
+        //     },
+        //     _ => {
+        //         chars.push(c);
+        //     }
+        // }
     }
     s.clear();
     for c in chars {
@@ -36,7 +43,7 @@ pub fn do_operations(v: &mut Vec<String>) {
             }
             *eq = sum.to_string();
         } else if eq.contains('-') {
-            let nums: Vec<i32> = eq.split('-').map(|num_str| num_str.trim().parse().unwrap()).collect();
+            let nums: Vec<i32> = eq.split('-').map(|num_str| num_str.trim().parse::<i32>().unwrap()).collect();
             sum = nums[0] - nums[1];
             *eq = sum.to_string();
         } else {
