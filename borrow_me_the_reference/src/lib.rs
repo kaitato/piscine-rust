@@ -1,38 +1,33 @@
 pub fn delete_and_backspace(s: &mut String) {
-    // let mut result_string = String::new();
     let mut chars: Vec<char> = Vec::new();
-    let mut skip_next_char = false;
 
-    
     for c in s.chars() {
-        if skip_next_char {
-            skip_next_char = false;
-            continue;
-        }
-        if c == '-' {
+         if c == '-' {
             chars.pop();
-        } else if c == '+' {
-            skip_next_char = true;
         } else {
             chars.push(c);
         }
-        // match c {
-        //     '-' => {
-        //         chars.pop();
-        //     },
-        //     '+' => {
-        //         skip_next_char = true;
-        //     },
-        //     _ => {
-        //         chars.push(c);
-        //     }
-        // }
     }
     s.clear();
     for c in chars {
         s.push(c);
+    } 
+    let mut chars: Vec<char> = Vec::new();
+    for c in s.chars().rev() {
+        if c == '+' {
+            chars.pop();
+        } else {
+            chars.push(c)
+        }
     }
+    s.clear();
+    for c in chars {
+        s.push(c);
+    } 
+    let reversed: String = s.chars().rev().collect();
+    *s = reversed
 }
+
 
 pub fn do_operations(v: &mut Vec<String>) {
     let mut sum = 0;
