@@ -33,7 +33,7 @@ pub fn do_operations(v: &mut Vec<String>) {
             for num_str in eq.split('+') {
                 sum += num_str.trim().parse::<i32>().unwrap();
             }
-            *eq = sum.tostring();
+            *eq = sum.to_string();
         } else if eq.contains('-') {
             let nums: Vec<i32> = eq.split('-').map(|num_str| num_str.trim().parse().unwrap()).collect();
             sum = nums[0] - nums[1];
