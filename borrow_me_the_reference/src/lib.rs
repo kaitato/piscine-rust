@@ -21,6 +21,7 @@ pub fn delete_and_backspace(s: &mut String) {
             }
         }
     }
+    s.clear();
     for c in chars {
         s.push(c);
     }
