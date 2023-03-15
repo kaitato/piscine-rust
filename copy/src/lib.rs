@@ -32,7 +32,7 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let a: i32 = 0;
+        let a: i32 = -12;
         let b = String::from("1 2 4 5 6");
         let c = vec![1, 2, 4, 5];
     
