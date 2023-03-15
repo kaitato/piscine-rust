@@ -27,17 +27,19 @@ pub fn delete_and_backspace(s: &mut String) {
 }
 
 pub fn do_operations(v: &mut Vec<String>) {
+    let mut sum = 0;
     for eq in v.iter_mut() {
-        if let Some(op_pos) = eq.find(|c: char| c == '+' || c == '-') {
-            let (left, right) = eq.split_at(op_pos);
-            let left_val = left.trim().parse::<i32>().unwrap();
-            let right_val = right[1..].trim().parse::<i32>().unwrap();
-            let result = match right.chars().next().unwrap() {
-                '+' => left_val + right_val,
-                '-' => left_val - right_val,
-                _ => panic!("Invalid operator found"),
-            };
-            *eq = result.to_string();
+        if eq.contains('+') {
+            for num_str in eq.split('+') {
+                sum += num_str.trim().parse::<i32>().unwrap();
+            }
+            *eq = sum.tostring();
+        } else if eq.contains('-') {
+            let nums: Vec<i32> = eq.split('-').map(|num_str| num_str.trim().parse().unwrap()).collect();
+            sum = nums[0] - nums[1];
+            *eq = sum.to_string();
+        } else {
+            sum = eq.parse().unwrap();
         }
     }
 }
