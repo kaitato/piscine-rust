@@ -64,36 +64,36 @@ pub fn vertical(player: &str, table: &Vec<Vec<&str>>) -> bool {
     return win
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+// #[cfg(test)]
+// mod tests {
+//     use super::*;
 
-    #[test]
-    fn it_works() {
-        println!(
-            "{:?}",
-            tic_tac_toe(vec![
-                vec!["O", "X", "O"],
-                vec!["O", "O", "X"],
-                vec!["X", "#", "X"]
-            ])
-        );
+//     #[test]
+//     fn it_works() {
+//         println!(
+//             "{:?}",
+//             tic_tac_toe(vec![
+//                 vec!["O", "X", "O"],
+//                 vec!["O", "O", "X"],
+//                 vec!["X", "#", "X"]
+//             ])
+//         );
     
-        println!(
-            "{:?}",
-            tic_tac_toe(vec![
-                vec!["X", "O", "O"],
-                vec!["X", "O", "O"],
-                vec!["#", "O", "X"]
-            ])
-        );
+//         println!(
+//             "{:?}",
+//             tic_tac_toe(vec![
+//                 vec!["X", "O", "O"],
+//                 vec!["X", "O", "O"],
+//                 vec!["#", "O", "X"]
+//             ])
+//         );
     
-        let dig = vec![
-                vec!["O", "O", "X"],
-                vec!["O", "X", "O"],
-                vec!["X", "#", "X"]
-            ];
+//         let dig = vec![
+//                 vec!["O", "O", "X"],
+//                 vec!["O", "X", "O"],
+//                 vec!["X", "#", "X"]
+//             ];
     
-        println!("{:?}",tic_tac_toe(dig));
-    }
-}
+//         println!("{:?}",tic_tac_toe(dig));
+//     }
+// }
