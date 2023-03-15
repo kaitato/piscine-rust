@@ -1,4 +1,4 @@
-fn tic_tac_toe(table: Vec<Vec<&str>>) -> String {
+pub fn tic_tac_toe(table: Vec<Vec<&str>>) -> String {
     let mut winner = "";
     // check rows
     for row in table.iter() {
