@@ -31,7 +31,9 @@ pub fn delete_and_backspace(s: &mut String) {
 
 pub fn do_operations(v: &mut Vec<String>) {
     let mut sum = 0;
+    let mut nums:Vec<i32> = Vec::new();
     for eq in v.iter_mut() {
+        sum = 0;
         if eq.contains('+') {
             for num_str in eq.split('+') {
                 sum += num_str.trim().parse::<i32>().unwrap();
@@ -41,9 +43,7 @@ pub fn do_operations(v: &mut Vec<String>) {
             let nums: Vec<i32> = eq.split('-').map(|num_str| num_str.trim().parse::<i32>().unwrap()).collect();
             sum = nums[0] - nums[1];
             *eq = sum.to_string();
-        } else {
-            sum = eq.parse().unwrap();
-        }
+        } 
     }
 }
 
@@ -54,7 +54,7 @@ mod tests {
     #[test]
     fn it_works() {
         let mut a = String::from("bpp--o+er+++sskroi-++lcw");
-        let mut b: Vec<String> = vec!["2+2", "3+2", "10-3", "5+5"];
+        let mut b: Vec<String> = vec!["2+2".to_string(), "3+2".to_string(), "10-3".to_string(), "5+5".to_string()];
     
         delete_and_backspace(&mut a);
         do_operations(&mut b);
