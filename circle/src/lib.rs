@@ -21,8 +21,8 @@ impl Circle {
     pub fn area(&self) -> f64 {
         PI * self.radius.powf(2.0)
     }
-    pub fn intersect(self, circle_2: &Circle) -> bool {
-        if (Point::distance(&self.center, &circle_2.center) - (self.radius + circle_2.radius)) <= 0. {
+    pub fn intersect(&self, circle_2: &Circle) -> bool {
+        if (Point::distance(&self.center, &circle_2.center) - (self.radius + circle_2.radius)) < 0. {
             true
         } else {
             false
@@ -38,7 +38,7 @@ pub struct Point {
 
 impl Point {
     pub fn distance(&self, point_2: &Point) -> f64 {
-        ((self.x - self.y).abs().powf(2.0) + (point_2.x - point_2.y).abs().powf(2.0)).sqrt()
+        (((self.x - self.y).powi(2)) + ((point_2.x - point_2.y).powi(2))).sqrt()
     }
 }
 
