@@ -38,7 +38,7 @@ pub struct Point {
 
 impl Point {
     pub fn distance(&self, point_2: &Point) -> f64 {
-        (((self.x - self.y).powi(2)) + ((point_2.x - point_2.y).powi(2))).sqrt()
+        (((self.x - point_2.x).powi(2)) + ((self.y - point_2.y).powi(2))).sqrt()
     }
 }
 
