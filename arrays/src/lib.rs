@@ -1,5 +1,5 @@
 pub fn sum(a: &[i32]) -> i32 {
-    let result;
+    let mut result = 0;
     for i in a {
         result += i;
     }
