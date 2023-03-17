@@ -1,15 +1,18 @@
+use std::collections::HashMap;
+
 pub fn is_permutation(s1: &str, s2: &str) -> bool {
     if s1.len() != s2.len() {
         return false;
     }
 
-    let mut counts = [0; 256];
+    let mut counts1 = HashMap::new();
     for c in s1.chars() {
-        counts[c as usize] += 1;
+        *counts1.entry(c).or_insert(0) += 1;
     }
     for c in s2.chars() {
-        counts[c as usize] -= 1;
-        if counts[c as usize] < 0 {
+        let count = counts1.entry(c).or_insert(0);
+        *count -= 1;
+        if *count < 0 {
             return false;
         }
     }
