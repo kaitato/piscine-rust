@@ -15,7 +15,7 @@ pub fn edit_distance(source: &str, target: &str) -> usize {
     }
     let mut source_len = source.len();
     if source.len() > target.len() {
-        source_len += working_target.len();
+        source_len -= working_target.len();
     }
     distance += source_len.abs_diff(target.len());
     distance
