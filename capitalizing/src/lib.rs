@@ -1,10 +1,11 @@
 pub fn capitalize_first(input: &str) -> String {
-let mut v: Vec<char> = input.chars().collect();
-v[0] = v[0].to_uppercase().next().unwrap();
-let string = v.into_iter().collect();
-string
-
+    let mut v: Vec<char> = input.chars().collect();
+    if let Some(first_char) = v.first_mut() {
+        *first_char = first_char.to_uppercase().next().unwrap();
+    }
+    v.into_iter().collect()
 }
+
 
 pub fn title_case(input: &str) -> String {
     let v: Vec<&str> = input.split_whitespace().collect();
