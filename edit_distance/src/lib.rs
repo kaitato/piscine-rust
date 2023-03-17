@@ -15,14 +15,12 @@ pub fn edit_distance(source: &str, target: &str) -> usize {
             break;
         }
     }
-    let mut source_len = source.len();
-    if source.len() > target.len() {
-        source_len -= working_target.len();
-    } else {
-        distance += working_target.len();
-    }
-    distance -= source_len.abs_diff(target.len()) ;
-    distance
+//     let source_len = source.len();
+//     if source.len() > target.len() {
+         working_target.len()
+//     } 
+//     distance += source_len.abs_diff(target.len()) ;
+//     distance
 }
 
 #[cfg(test)]
@@ -31,8 +29,24 @@ mod tests {
 
     #[test]
     fn it_works() {
-	let target = "alignment";
-	let source = "assignment";
+	let source = "alignment";
+	let target = "assignment";
+	println!(
+		"It's necessary to make {} change(s) to {}, to get {}",
+		edit_distance(source, target),
+		source,
+		target
+	);
+    let source = "gumbo";
+	let target = "gambol";
+	println!(
+		"It's necessary to make {} change(s) to {}, to get {}",
+		edit_distance(source, target),
+		source,
+		target
+	);
+    let source = "kitten";
+	let target = "sitting";
 	println!(
 		"It's necessary to make {} change(s) to {}, to get {}",
 		edit_distance(source, target),
