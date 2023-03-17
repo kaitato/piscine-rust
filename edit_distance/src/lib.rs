@@ -19,9 +19,9 @@ pub fn edit_distance(source: &str, target: &str) -> usize {
     if source.len() > target.len() {
         source_len -= working_target.len();
     } else {
-
+        distance += working_target.len();
     }
-    distance += source_len.abs_diff(target.len());
+    distance -= source_len.abs_diff(target.len()) ;
     distance
 }
 
@@ -31,8 +31,8 @@ mod tests {
 
     #[test]
     fn it_works() {
-	let source = "alignment";
-	let target = "assignment";
+	let target = "alignment";
+	let source = "assignment";
 	println!(
 		"It's necessary to make {} change(s) to {}, to get {}",
 		edit_distance(source, target),
