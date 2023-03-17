@@ -1,4 +1,6 @@
 pub fn edit_distance(source: &str, target: &str) -> usize {
+    println!("{}, {}", source, target);
+
     let mut distance = 0;
     let mut working_target = target.to_string();
     for char in source.chars() {
@@ -16,6 +18,8 @@ pub fn edit_distance(source: &str, target: &str) -> usize {
     let mut source_len = source.len();
     if source.len() > target.len() {
         source_len -= working_target.len();
+    } else {
+
     }
     distance += source_len.abs_diff(target.len());
     distance
