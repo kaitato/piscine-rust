@@ -1,6 +1,6 @@
 pub fn capitalize_first(input: &str) -> String {
 let mut v: Vec<char> = input.chars().collect();
-v[0] = v[0].to_uppercase().nth(0).unwrap();
+v[0] = v[0].to_uppercase().next().unwrap();
 let string = v.into_iter().collect();
 string
 
