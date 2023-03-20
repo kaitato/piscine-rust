@@ -10,11 +10,11 @@ pub fn fetch_data(server: Result<String, String>, security_level: Security) -> S
     match server {
         Ok(url) => url,
         Err(_) => match security_level {
-            Security::Unknown => server.unwrap(),
+            Security::Unknown => server.unwrap_err(),
             Security::High => server.expect("ERROR: program stops"),
             Security::Medium => server.unwrap_or("WARNING: check the server".to_string()),
             Security::Low => server.unwrap_or_else(|error| return "Not found: ".to_string()+ &error),
-            Security::BlockServer => server.unwrap_err(),
+            Security::BlockServer => server.unwrap(),
         }
     }
 }
