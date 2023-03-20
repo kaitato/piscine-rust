@@ -14,10 +14,7 @@ pub fn fetch_data(server: Result<String, String>, security_level: Security) -> S
             Security::High => server.expect("ERROR: program stops"),
             Security::Medium => server.unwrap_or("WARNING: check the server".to_string()),
             Security::Low => server.unwrap_or_else(|error| return "Not found: ".to_string()+ &error),
-            Security::BlockServer => match server {
-                Ok(url) => server.unwrap_err(),
-                Err(_) => 
-            }
+            Security::BlockServer => server.unwrap_err(),
         }
     }
 }
