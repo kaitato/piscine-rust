@@ -12,12 +12,9 @@ pub fn fetch_data(server: Result<String, String>, security_level: Security) -> S
         Err(_) => match security_level {
             Security::Unknown => server.unwrap(),
             Security::High => server.expect("ERROR: program stops"),
-            Security::Medium => server.expect("WARNING: check the server"),
-            Security::Low => server.expect("Not found: [SERVER_URL]"),
-            Security::BlockServer => match server {
-                Ok(a) => a,
-                Err(_) => panic!(),
-            },
+            Security::Medium => server.unwrap_or("default_value".to_string()),
+            Security::Low => server.unwrap_or_else(|error| return error),
+            Security::BlockServer => server.unwrap_err(),
         }
     }
 }
