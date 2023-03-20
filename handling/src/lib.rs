@@ -5,15 +5,11 @@ use std::io::{ErrorKind, Write};
 
 pub fn open_or_create(file: &str, content: &str) {
     let file_result = File::open(file);
-    let _open_file = match file_result {
+    let mut open_file = match file_result {
         Ok(file) => file,
         Err(error) => match error.kind() {
             ErrorKind::NotFound => match File::create(file) {
-                Ok(mut fc) => {
-                    fc.write(content.as_bytes()).unwrap();
-                    fc
-                
-                },
+                Ok(fc) => fc,
                 Err(e) => panic!("Problem Creating File: {:?}", e),
             },
             other_error => {
@@ -21,7 +17,7 @@ pub fn open_or_create(file: &str, content: &str) {
             }
         },
     };
-
+    open_file.write_all(content.as_bytes()).expect("Can't write into file");
 }
 
 // #[cfg(test)]
