@@ -17,7 +17,7 @@ pub fn open_or_create(file: &str, content: &str) {
             }
         },
     };
-    open_file.write_all(content.as_bytes()).unwrap();
+    open_file.write_all(content.as_bytes());
 }
 
 // #[cfg(test)]
