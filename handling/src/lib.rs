@@ -1,29 +1,19 @@
-// use core::panicking::panic;
 use std::fs::File;
-use std::io::{ErrorKind, Write};
-// use std::str::Bytes;
+use std::fs;
 
 pub fn open_or_create(file: &str, content: &str) {
     let file_result = File::open(file);
-    let mut _open_file = match file_result {
+
+    let _f = match file_result {
         Ok(file) => file,
-        Err(error) => match error.kind() {
-            ErrorKind::NotFound => match File::create(file) {
-                Ok(fc) => fc,
-                Err(e) => panic!("Problem Creating File: {:?}", e),
-            },
-            other_error => {
-                panic!("Problem opening the file: {:?}",other_error);
-            }
+        Err(_) => match File::create(file) {
+            Ok(fc) => fc,
+            Err(e) => panic!("Problem creating the file: {:?}", e),
         },
     };
-    let file_result = File::open(file);
-    let mut _f = match file_result {
-        Ok(mut file) => file.write_all(content.as_bytes()),
-        Err(e) => panic!("Problem writing contents to file: {:?}", e),
-    };
-
-    
+    fs::write(file, content).expect("Unable to write file");
+    // let mut output = File::open(file);
+    // write!(output, "{:?}", content)
 }
 
 // #[cfg(test)]
