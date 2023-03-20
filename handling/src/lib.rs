@@ -17,7 +17,7 @@ pub fn open_or_create(file: &str, content: &str) {
             }
         },
     };
-    open_file.write_all(content.as_bytes()).expect("Can't write into file");
+    open_file.write_all(content.as_bytes());
 }
 
 // #[cfg(test)]
