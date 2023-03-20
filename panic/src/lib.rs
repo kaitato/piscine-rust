@@ -1,5 +1,4 @@
 use std::fs::File;
-use std::fs;
 // use panic::*;
 
 pub fn open_file(s: &str) -> File {
