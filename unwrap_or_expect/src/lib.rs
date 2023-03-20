@@ -8,13 +8,17 @@ pub enum Security {
 
 pub fn fetch_data(server: Result<String, String>, security_level: Security) -> String {
     match server {
-        Ok(url) => url,
+        Ok(ref url) => match security_level {
+            Security::BlockServer => server.unwrap_err(),
+            _ => url.to_string(),
+            
+        },
         Err(_) => match security_level {
-            Security::Unknown => server.unwrap_err(),
+            Security::Unknown => server.unwrap(),
             Security::High => server.expect("ERROR: program stops"),
             Security::Medium => server.unwrap_or("WARNING: check the server".to_string()),
             Security::Low => server.unwrap_or_else(|error| return "Not found: ".to_string()+ &error),
-            Security::BlockServer => server.unwrap(),
+            Security::BlockServer => server.unwrap_err(),
         }
     }
 }
