@@ -1,4 +1,5 @@
 pub fn tic_tac_toe(table: Vec<Vec<&str>>) -> String {
+    println!("{:#?}", table);
     let mut winner = "";
     // check rows
     for row in table.iter() {
