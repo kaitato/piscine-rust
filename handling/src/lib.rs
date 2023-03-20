@@ -5,7 +5,7 @@ use std::io::{ErrorKind, Write};
 
 pub fn open_or_create(file: &str, content: &str) {
     let file_result = File::open(file);
-    let mut _open_file = match file_result {
+    let mut open_file = match file_result {
         Ok(file) => file,
         Err(error) => match error.kind() {
             ErrorKind::NotFound => match File::create(file) {
@@ -17,11 +17,9 @@ pub fn open_or_create(file: &str, content: &str) {
             }
         },
     };
-    let file_result = File::open(file);
-    let mut _open_file = match file_result {
-        Ok(mut file) => file.write_all(content.as_bytes()),
-        Err(error) => panic!("{:?}",error),
-    };
+    open_file.write_all(content.as_bytes()).unwrap_err();
+
+    
 }
 
 // #[cfg(test)]
