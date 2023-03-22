@@ -1,4 +1,4 @@
-use chrono::{NaiveDateTime, Utc};
+use chrono::{NaiveDate, Utc};
 
 #[derive(Debug, Eq, PartialEq)]
 pub struct FormError {
@@ -21,7 +21,7 @@ impl FormError {
 pub struct Form {
     pub first_name: String,
     pub last_name: String,
-    pub birth: NaiveDateTime,
+    pub birth: NaiveDate,
     pub birth_location: String,
     pub password: String,
 }
@@ -30,7 +30,7 @@ impl Form {
     pub fn new(
         first_name: String,
         last_name: String,
-        birth: NaiveDateTime,
+        birth: NaiveDate,
         birth_location: String,
         password: String,
     ) -> Form {
@@ -43,46 +43,48 @@ impl Form {
         }
     }
 
-    pub fn validate(&self) -> Result<(), FormError> {
-        let mut errors: Vec<String> = vec![];
+    pub fn validate(&self) -> Result<Vec<&str>, FormError> {
+        let mut errors = vec![];
 
-        // Validate first name
         if self.first_name.is_empty() {
-            errors.push("No user name".to_string());
+            let err = FormError::new("first_name".to_string(), self.first_name.clone(), "No user name".to_string());
+            return Err(err);
+        } else {
+            errors.push("Valid first name");
         }
 
-        // Validate password
-        let mut has_alphabetic = false;
-        let mut has_numeric = false;
-        let mut has_non_alphanumeric = false;
+        if self.password.len() < 8 {
+            let err = FormError::new("password".to_string(), self.password.clone(), "At least 8 characters".to_string());
+            return Err(err);
+        }
+
+        let mut has_alpha = false;
+        let mut has_digit = false;
+        let mut has_non_alphanum = false;
+
         for c in self.password.chars() {
             if c.is_alphabetic() {
-                has_alphabetic = true;
-            } else if c.is_numeric() {
-                has_numeric = true;
+                has_alpha = true;
+            } else if c.is_digit(10) {
+                has_digit = true;
             } else if !c.is_ascii_alphanumeric() {
-                has_non_alphanumeric = true;
-            }
-
-            if has_alphabetic && has_numeric && has_non_alphanumeric {
-                break;
+                has_non_alphanum = true;
             }
         }
-        if self.password.len() < 8 {
-            errors.push("At least 8 characters".to_string());
-        } else if !(has_alphabetic && has_numeric && has_non_alphanumeric) {
-            errors.push(
-                "Combination of different ASCII character types (numbers, letters and none alphanumeric characters)".to_string(),
-            );
+
+        if !has_alpha || !has_digit || !has_non_alphanum {
+            let err = FormError::new("password".to_string(), self.password.clone(), "Combination of different ASCII character types (numbers, letters and none alphanumeric characters)".to_string());
+            return Err(err);
+        } else {
+            errors.push("Valid password");
         }
 
-        if !errors.is_empty() {
-            let err = errors.join("; ");
-            return Err(FormError::new("password".to_string(), self.password.clone(), err));
-        }
-
-        Ok(())
+        Ok(errors)
     }
+}
+
+pub fn create_date(date_str: &str) -> NaiveDate {
+    NaiveDate::parse_from_str(date_str, "%Y-%m-%d").unwrap()
 }
 
 // #[cfg(test)]
