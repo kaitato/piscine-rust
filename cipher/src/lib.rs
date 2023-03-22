@@ -19,8 +19,8 @@ pub fn cipher(original: &str, ciphered: &str) -> Option<Result<bool, CipherError
     if ciphered_lower == original_lower {
         Some(Ok(true))
     }else {
-        let expected = original_lower;
-        Some(Err(CipherError::new(false, expected)))
+        // let expected = original_lower;
+        None
     }
 }
 
