@@ -11,21 +11,22 @@ impl CipherError {
 }
 
 pub fn cipher(original: &str, ciphered: &str) -> Option<Result<bool, CipherError>> {
-    let atbash = original.chars()
-                         .map(|c| {
-                             if c.is_ascii_alphabetic() {
-                                 (b'a' + b'z' - c.to_ascii_lowercase() as u8) as char
-                             } else {
-                                 c
-                             }
-                         })
-                         .collect::<String>();
+    let atbash_cipher = original
+        .chars()
+        .map(|c| {
+            if c.is_ascii_alphabetic() {
+                let base = if c.is_ascii_lowercase() { b'a' } else { b'A' };
+                (b'z' - (c as u8 - base)) as char
+            } else {
+                c
+            }
+        })
+        .collect::<String>();
 
-    if atbash == ciphered {
+    if atbash_cipher == ciphered {
         Some(Ok(true))
     } else {
-        let error = CipherError::new(false, atbash);
-        Some(Err(error))
+        Some(Err(CipherError::new(false, atbash_cipher)))
     }
 }
 
