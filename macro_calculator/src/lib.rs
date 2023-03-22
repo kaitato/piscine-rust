@@ -11,7 +11,7 @@ pub struct Food {
 pub fn calculate_macros(foods: Vec<Food>) -> json::JsonValue {
     let calories = foods.iter()
         .fold((0.0,0.0,0.0,0.0),| mut acc, food: &Food| {
-            acc.0 += format!("{:.2}",(((food.calories[1]
+            acc.0 += ((format!("{:.2}",(food.calories[1]
                 .replace("kcal", "")
                 .parse::<f64>().unwrap() * food.nbr_of_portions))).to_string()).parse::<f64>().unwrap();
             acc.1 += format!("{:.2}",(food.carbs *food.nbr_of_portions).to_string()).parse::<f64>().unwrap();
