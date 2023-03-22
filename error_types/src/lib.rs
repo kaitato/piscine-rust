@@ -19,11 +19,11 @@ impl FormError {
 
 #[derive(Debug, Eq, PartialEq)]
 pub struct Form {
-    first_name: String,
-    last_name: String,
-    birth: NaiveDateTime,
-    birth_location: String,
-    password: String,
+    pub first_name: String,
+    pub last_name: String,
+    pub birth: NaiveDateTime,
+    pub birth_location: String,
+    pub password: String,
 }
 
 impl Form {
