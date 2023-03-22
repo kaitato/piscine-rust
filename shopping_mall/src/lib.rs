@@ -59,9 +59,7 @@ pub fn check_for_securities(mall: &mut Mall, guards: Vec<Guard>) {
     let mut number_of_meters = 0;
     let mut number_of_guards = mall.guards.len();
     for floor in mall.floors.iter() {
-        for store in floor.stores.iter() {
-                number_of_meters += store.square_meters;
-        }
+            number_of_meters += floor.size_limit;
     }
     for guard in guards {
         println!("hello{}, {}, {}", number_of_meters / 200 < number_of_guards.try_into().unwrap(), number_of_meters / 200, number_of_guards);
