@@ -12,7 +12,7 @@ impl CipherError {
 
 pub fn cipher(original: &str, ciphered: &str) -> Option<Result<bool, CipherError>> {
     if original.is_empty() || ciphered.is_empty() {
-        return Some(Err(CipherError::new(false, String::new())));
+        return None;
     }
 
     let atbash_cipher: String = original
