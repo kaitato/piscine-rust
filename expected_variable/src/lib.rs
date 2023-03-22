@@ -1,8 +1,7 @@
 // use crate::edit_distance;
 pub use case;
 pub use case::CaseExt;
-pub mod edit_distance;
-pub use crate::edit_distance::edit_distance;
+pub use edit_distance::edit_distance;
 // pub use edit_distance::edit_distance;
 
 
