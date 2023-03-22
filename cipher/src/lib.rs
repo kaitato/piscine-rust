@@ -11,9 +11,7 @@ impl CipherError {
 }
 
 pub fn cipher(original: &str, ciphered: &str) -> Option<Result<bool, CipherError>> {
-    if original.is_empty() && ciphered.is_empty() {
-        return Some(Ok(true));
-    } else if original.is_empty() || ciphered.is_empty() {
+    if original.is_empty() || ciphered.is_empty() {
         return Some(Err(CipherError::new(false, String::new())));
     }
 
