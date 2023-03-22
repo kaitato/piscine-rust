@@ -1,5 +1,5 @@
-use std::num::ParseFloatError;
 use std::collections::HashMap;
+use std::num::ParseFloatError;
 
 pub struct Flag {
     pub short_hand: String,
@@ -9,14 +9,13 @@ pub struct Flag {
 
 impl Flag {
     pub fn opt_flag(l_h: &str, d: &str) -> Flag {
-        let mut lh = String::from("--");
-        lh.push_str(l_h);
-        let sh = String::from("-");
-        sh.to_string().push(l_h.chars().next().unwrap());
+        let short_hand = format!("-{}", l_h.chars().next().unwrap());
+        let long_hand = format!("--{}", l_h);
+        let desc = d.to_string();
         Flag {
-            short_hand: sh,
-            long_hand: lh,
-            desc: d.to_string(),
+            short_hand,
+            long_hand,
+            desc,
         }
     }
 }
@@ -31,31 +30,30 @@ impl FlagsHandler {
     pub fn add_flag(&mut self, flag: (String, String), func: Callback) {
         self.flags.insert(flag, func);
     }
+
     pub fn exec_func(&mut self, flag: (String, String), argv: &[&str]) -> String {
         match self.flags.get(&flag) {
-            Some(callback) => {
-                match callback(argv[0], argv[1]) {
+            Some(func) => {
+                match func(argv[0], argv[1]) {
                     Ok(result) => result,
-                    Err(e) => format!("Error: {}", e),
+                    Err(err) => err.to_string(),
                 }
             }
-            None => "Error: Flag not found".to_owned(),
+            None => format!("Error: Flag {:?} not found!", flag),
         }
     }
 }
 
-
-
 pub fn div(a: &str, b: &str) -> Result<String, ParseFloatError> {
-    let a_float = a.parse::<f64>()?;
-    let b_float = b.parse::<f64>()?;
-    Ok((a_float / b_float).to_string())
+    let x = a.parse::<f64>()?;
+    let y = b.parse::<f64>()?;
+    Ok((x / y).to_string())
 }
 
 pub fn rem(a: &str, b: &str) -> Result<String, ParseFloatError> {
-    let a_float = a.parse::<f64>()?;
-    let b_float = b.parse::<f64>()?;
-    Ok((a_float % b_float).to_string())
+    let x = a.parse::<f64>()?;
+    let y = b.parse::<f64>()?;
+    Ok((x % y).to_string())
 }
 #[cfg(test)]
 mod tests {
