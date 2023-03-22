@@ -7,22 +7,19 @@ pub fn middle_day(year: i32) -> Option<wd> {
     if days_in_year % 2 == 0 {
         return None;
     }
-    let middle_day_num = days_in_year / 2;
+    let middle_day_num = days_in_year / 2 ;
     let middle_date = (NaiveDate::from_ymd(year, 1, 1) + Duration::days(middle_day_num))
         .weekday();
     Some(middle_date)
 
 }
 
-// #[cfg(test)]
-// mod tests {
-//     use super::*;
+#[cfg(test)]
+mod tests {
+    use super::*;
 
-//     #[test]
-//     fn it_works() {
-//         let year = 2023;
-//         let jan_1 = NaiveDate::from_ymd(year, 1, 1);
-//         let middle_day = jan_1 + chrono::Duration::days(182);
-//         println!("Middle day of the year {} is {}", year, middle_day);
-//     }
-// }
+    #[test]
+    fn it_works() {
+        println!("{:?}", middle_day(1022).unwrap());
+    }
+}
