@@ -7,7 +7,7 @@ pub fn middle_day(year: i32) -> Option<wd> {
     if days_in_year % 2 == 0 {
         return None;
     }
-    let middle_day_num = (days_in_year / 2) + 1;
+    let middle_day_num = days_in_year / 2;
     let middle_date = (NaiveDate::from_ymd(year, 1, 1) + Duration::days(middle_day_num))
         .weekday();
     Some(middle_date)
