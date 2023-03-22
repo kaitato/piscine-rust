@@ -7,4 +7,4 @@ edition = "2021"
 
 [dependencies]
 case = "1.0.0"
-edit_distance = { path = "../edit_distance" }
+edit_distance = { path = "../edit_distance/." }
