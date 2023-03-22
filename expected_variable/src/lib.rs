@@ -24,10 +24,11 @@ pub fn expected_variable(string_to_compare: &str, expected_string: &str) -> Opti
         }
         // println!("{}, {}, {}, {}", alikeness, distance, expected_string.len(), string_to_compare.len());
         // println!("{}", Some(alikeness.to_string() + "%").unwrap());
-        match alikeness {
-            a if a > 50 => Some(alikeness.to_string() + "%"),
-            _ => None,
-            }
+        if alikeness > 50 {
+            Some(alikeness.to_string() + "%")
+        } else {
+            None
+        }
     }
 }
 
