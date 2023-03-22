@@ -10,13 +10,16 @@ pub use edit_distance::edit_distance;
 pub fn expected_variable(string_to_compare: &str, expected_string: &str) -> Option<String> {
     if string_to_compare.is_camel_lowercase() == false && string_to_compare.contains('_') == false {
         return None
+    } else if string_to_compare.is_empty() || expected_string.is_empty() {
+            return None
+        
     } else {
         let distance  = edit_distance(&string_to_compare.to_lowercase(), &expected_string.to_lowercase());
         let mut alikeness = 0;
-        if (distance / string_to_compare.len()) > 100{
+        if (distance * 100 / std::cmp::max(string_to_compare.len(), expected_string.len())) > 100{
             alikeness = 0;        
         } else {
-            alikeness = 100 - (distance * 100 / expected_string.len());
+            alikeness = 100 - (distance * 100 / std::cmp::max(string_to_compare.len(), expected_string.len()));
 
         }
         // println!("{}, {}, {}, {}", alikeness, distance, expected_string.len(), string_to_compare.len());
