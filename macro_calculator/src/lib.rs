@@ -20,12 +20,12 @@ pub fn calculate_macros(foods: Vec<Food>) -> json::JsonValue {
     // }
     let calories = foods.iter()
         .fold((0.0,0.0,0.0,0.0),| mut acc, food: &Food| {
-            acc.0 += ((food.calories[1]
+            acc.0 += (((food.calories[1]
                 .replace("kcal", "")
-                .parse::<f64>().unwrap() * food.nbr_of_portions) as i64 * 100) as f64 / 100.;
-            acc.1 += ((food.carbs * food.nbr_of_portions) as i64 * 100) as f64 / 100.;
-            acc.2 += ((food.proteins * food.nbr_of_portions) as i64 * 100) as f64 / 100.;
-            acc.3 += ((food.fats *food.nbr_of_portions) as i64 * 100) as f64 / 100.;
+                .parse::<f64>().unwrap() * food.nbr_of_portions) * 100.) as i64 / 100) as f64;
+            acc.1 += (((food.carbs * food.nbr_of_portions) * 100.) as i64 / 100) as f64;
+            acc.2 += (((food.proteins * food.nbr_of_portions) * 100.) as i64 / 100) as f64;
+            acc.3 += (((food.fats *food.nbr_of_portions) * 100.) as i64 / 100) as f64;
             println!("{:?}", acc);
             acc
             });
