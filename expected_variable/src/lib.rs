@@ -2,7 +2,8 @@
 pub use case;
 pub use case::CaseExt;
 pub mod edit_distance;
-pub use edit_distance::edit_distance;
+pub use crate::edit_distance::edit_distance;
+// pub use edit_distance::edit_distance;
 
 
 pub fn expected_variable(string_to_compare: &str, expected_string: &str) -> Option<String> {
