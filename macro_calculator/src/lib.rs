@@ -9,6 +9,15 @@ pub struct Food {
 }
 
 pub fn calculate_macros(foods: Vec<Food>) -> json::JsonValue {
+    if foods.len() == 0 {
+        let result = object!{
+            calories: 0,
+           carbs: 0,
+            proteins: 0,
+            fats: 0,
+        };
+        return result
+    }
     let calories = foods.iter()
         .fold((0.0,0.0,0.0,0.0),| mut acc, food: &Food| {
             acc.0 += ((food.calories[1]
