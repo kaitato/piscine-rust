@@ -1,7 +1,7 @@
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub struct CipherError {
-    pub validation: bool,
-    pub expected: String,
+    validation: bool,
+    expected: String,
 }
 
 impl CipherError {
@@ -11,16 +11,21 @@ impl CipherError {
 }
 
 pub fn cipher(original: &str, ciphered: &str) -> Option<Result<bool, CipherError>> {
-    let ciphered_lower = ciphered.to_lowercase();
-    let original_lower = original.to_lowercase().chars()
-        .filter(|c| c.is_ascii_alphabetic())
-        .map(|c| ('a' as u8 + ('z' as u8 - c as u8)) as char)
-        .collect::<String>();
-    if ciphered_lower == original_lower {
+    let atbash = original.chars()
+                         .map(|c| {
+                             if c.is_ascii_alphabetic() {
+                                 (b'a' + b'z' - c.to_ascii_lowercase() as u8) as char
+                             } else {
+                                 c
+                             }
+                         })
+                         .collect::<String>();
+
+    if atbash == ciphered {
         Some(Ok(true))
-    }else {
-        // let expected = original_lower;
-        None
+    } else {
+        let error = CipherError::new(false, atbash);
+        Some(Err(error))
     }
 }
 
