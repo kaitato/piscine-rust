@@ -57,7 +57,7 @@
 //     }
 // }
 pub use edit_distance::edit_distance;
-fn expected_variable(s1: &str, s2: &str) -> Option<String> {
+pub fn expected_variable(s1: &str, s2: &str) -> Option<String> {
     let is_camel = s1.chars().next().map_or(false, char::is_uppercase) && s1.chars().any(|c| c == '_');
     let is_snake = s1.chars().all(|c| c == '_' || c.is_ascii_lowercase());
 
