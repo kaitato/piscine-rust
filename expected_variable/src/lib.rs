@@ -43,7 +43,7 @@ pub fn expected_variable(s1: &str, s2: &str) -> Option<String> {
 //             None
 //         }
 //     }
-}
+// }
 
 #[cfg(test)]
 mod tests {
