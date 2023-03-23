@@ -8,7 +8,7 @@ pub fn talking(text: &str) -> &str {
         }
     } else if text.chars().last() == Some('?') {
         return "Sure."
-    } else if text == "" {
+    } else if text == "" || text.chars().all(|c| c.is_alphanumeric()) {
         return "Just say something!"
     } else {
         return "Interesting"
