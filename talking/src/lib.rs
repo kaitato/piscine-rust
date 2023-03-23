@@ -1,9 +1,11 @@
 pub fn talking(text: &str) -> &str {
     // if text.chars().all(|c| c.is_uppercase()) {
-    if text == "" {
+    if text.is_empty() {
         return "Just say something!"
-    }
-    if text.chars().filter(|c| c.is_alphabetic()).all(|c|c.is_uppercase()){
+    } else if text
+                .chars()
+                .filter(|c| c.is_alphabetic())
+                .all(|c|c.is_uppercase()){
         if text.chars().last() == Some('?') {
             return "Quiet, I am thinking!"
         }else {
