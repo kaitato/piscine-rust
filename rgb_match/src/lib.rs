@@ -7,38 +7,83 @@ pub struct Color {
 }
 
 
+
 impl Color {
+    pub fn new(r: u8, g: u8, b: u8, a: u8) -> Color {
+        Color { r, g, b, a }
+    }
+
+    pub fn r(&self) -> u8 {
+        self.r
+    }
+
+    pub fn g(&self) -> u8 {
+        self.g
+    }
+
+    pub fn b(&self) -> u8 {
+        self.b
+    }
+
+    pub fn a(&self) -> u8 {
+        self.a
+    }
+
+    pub fn set_r(&mut self, r: u8) {
+        self.r = r;
+    }
+
+    pub fn set_g(&mut self, g: u8) {
+        self.g = g;
+    }
+
+    pub fn set_b(&mut self, b: u8) {
+        self.b = b;
+    }
+
+    pub fn set_a(&mut self, a: u8) {
+        self.a = a;
+    }
+
     pub fn swap(mut self, first: u8, second: u8) -> Color {
+        let first_color = match first {
+            1 => self.r(),
+            2 => self.g(),
+            3 => self.b(),
+            4 => self.a(),
+            _ => unreachable!(),
+        };
+        let second_color = match second {
+            1 => self.r(),
+            2 => self.g(),
+            3 => self.b(),
+            4 => self.a(),
+            _ => unreachable!(),
+        };
         match (first, second) {
             (1, 2) => {
-                let temp = self.r;
-                self.r = self.g;
-                self.g = temp;
+                self.set_r(second_color);
+                self.set_g(first_color);
             }
             (1, 3) => {
-                let temp = self.r;
-                self.r = self.b;
-                self.b = temp;
+                self.set_r(second_color);
+                self.set_b(first_color);
             }
             (1, 4) => {
-                let temp = self.r;
-                self.r = self.a;
-                self.a = temp;
+                self.set_r(second_color);
+                self.set_a(first_color);
             }
             (2, 3) => {
-                let temp = self.g;
-                self.g = self.b;
-                self.b = temp;
+                self.set_g(second_color);
+                self.set_b(first_color);
             }
             (2, 4) => {
-                let temp = self.g;
-                self.g = self.a;
-                self.a = temp;
+                self.set_g(second_color);
+                self.set_a(first_color);
             }
             (3, 4) => {
-                let temp = self.b;
-                self.b = self.a;
-                self.a = temp;
+                self.set_b(second_color);
+                self.set_a(first_color);
             }
             _ => {}
         }
