@@ -16,7 +16,7 @@ pub fn talking(text: &str) -> &str {
     if text.is_empty() || text.chars().all(|c| c.is_alphanumeric() == false) {
         return "Just say something!"
     } else if text.chars().last() == Some('?') {
-        if text.to_uppercase() == text {
+        if text.to_uppercase() == text && !text.chars().any(|c| c.is_numeric()) {
             return "Quiet, I am thinking!"
         } else {
             return "Sure."
