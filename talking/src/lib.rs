@@ -1,11 +1,6 @@
 pub fn talking(text: &str) -> &str {
     // if text.chars().all(|c| c.is_uppercase()) {
-    if text.chars().all(|c| c.is_alphanumeric()) {
-        return "Just say something!"
-    } else if text
-                .chars()
-                .filter(|c| c.is_alphabetic())
-                .all(|c|c.is_uppercase()){
+    if text.chars().filter(|c| c.is_alphabetic()).all(|c|c.is_uppercase()){
         if text.chars().last() == Some('?') {
             return "Quiet, I am thinking!"
         }else {
@@ -13,6 +8,8 @@ pub fn talking(text: &str) -> &str {
         }
     } else if text.chars().last() == Some('?') {
         return "Sure."
+    } else if text == "" {
+        return "Just say something!"
     } else {
         return "Interesting"
     }
