@@ -1,6 +1,5 @@
 pub fn talking(text: &str) -> &str {
     // if text.chars().all(|c| c.is_uppercase()) {
-        println!(text)
     if text.is_empty() || text.chars().all(|c| c.is_alphanumeric() == false) {
         return "Just say something!"
     } else if text.chars().filter(|c| c.is_alphabetic()).all(|c|c.is_ascii_uppercase()) && text.chars().any(|c| !c.is_alphanumeric()){
