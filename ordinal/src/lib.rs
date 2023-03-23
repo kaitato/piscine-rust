@@ -6,11 +6,10 @@ pub fn num_to_ordinal(x: u32) -> String {
         return res
     }
     match last_num {
-        0 | 4 | 5 | 6 | 7 | 8 | 9 => res.push_str("th"),
         1 => res.push_str("st"),
         2 => res.push_str("nd"),
         3 => res.push_str("rd"),
-        _ => return res,
+        _ => res.push_str("th"),
     };
     res
     
