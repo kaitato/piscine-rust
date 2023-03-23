@@ -2,9 +2,9 @@ pub fn talking(text: &str) -> &str {
     // if text.chars().all(|c| c.is_uppercase()) {
     if text.is_empty() || text.chars().all(|c| c.is_alphanumeric() == false) {
         return "Just say something!"
-    } else if text.chars().last() == Some('?') &&  !text.chars().filter(|c| c.is_alphabetic()).all(|c|c.is_ascii_uppercase()){
+    } else if text.chars().last() == Some('?') && text.to_uppercase() == text && text.chars().any(|c| c.is_alphanumeric()){
         return "Sure."
-    } else if text.chars().filter(|c| c.is_alphabetic()).all(|c|c.is_ascii_uppercase()) && text.chars().any(|c| !c.is_alphanumeric()){
+    } else if text.to_uppercase() == text {
         if text.chars().last() == Some('?') {
             return "Quiet, I am thinking!"
         }else {
