@@ -10,7 +10,8 @@ pub fn scytale_cipher(message: String, i: u32) -> String {
             }
         }
     }
-    result.iter().flatten().collect()
+    let res: String = result.iter().flatten().collect();
+    res.trim().to_string()
 }
 
 #[cfg(test)]
