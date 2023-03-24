@@ -1,47 +1,47 @@
-pub fn pig_latin(word: &str) -> String {
-    let vowels = "aeiouAEIOU";
-    let mut chars = word.chars();
-    let first_char = chars.next().unwrap();
-    let mut rest = chars.as_str();
-    let mut pig_word = String::new();
-    if vowels.contains(first_char) {
-        pig_word.push_str(word);
-        pig_word.push_str("ay");
-    } else if rest.starts_with("qu") {
-        let rest = &chars.as_str().replace("qu", "");
-        pig_word.push_str(rest);
-        pig_word.push(first_char);
-        pig_word.push_str("quay");
-    } else {
-        let mut consonants = String::new();
-        consonants.push(first_char);
-        while let Some(c) = chars.next() {
-            if c == 'q' {
-                // print!("hi?");
-                if let Some(next_char) = chars.next() {
-                    if next_char == 'u' {
-                        consonants.push_str("qu");
-                        pig_word.push_str(rest);
-                        pig_word.push_str(&consonants);
-                        pig_word.push_str("ay");
-                        break;
-                    }
-                }
+pub fn pig_latin(text: &str) -> String {
+    println!("{}", text);
+    fn is_vowel(c: char) -> bool {
+        match c {
+                'a' | 'e' | 'i' | 'o' | 'u' | 'A' | 'E' | 'I' | 'O' | 'U' => true,
+                _ => false,
             }
-            if !vowels.contains(c) {
-                consonants.push(c);
-            } else {
-                // print!("---{}---",rest);
-                // rest = chars.as_str();
-                pig_word.push_str(rest);
-                pig_word.push_str(&consonants);
-                pig_word.push_str("ay");
+    }
+    let mut new_string = text.to_string();
+    let mut next_char = false;
+    loop {
+        for (i, char) in text.chars().enumerate() {
+            if next_char && char == 'q' {
+                new_string.remove(0);
+                new_string.push(char);
+                continue
+            }
+            if next_char && char == 'u' {
+                new_string.remove(0);
+                new_string.push(char);
+                next_char = false;
+            }
+            if !is_vowel(char) && text.len() > i + 2 && &text[i+1..i+3] == "qu" {
+                new_string.remove(0);
+                new_string.push(char);
+                next_char = true;
+            }else if i == 0 && is_vowel(char){
                 break;
+            }else if !is_vowel(char) {
+                new_string.remove(0);
+                new_string.push(char);
+                continue;
+            } else { 
+                break
             }
         }
+        break
     }
-    pig_word
+    new_string.push('a');
+    new_string.push('y');
+    return new_string
 }
+
+
 #[cfg(test)]
 mod tests {
     use super::*;
