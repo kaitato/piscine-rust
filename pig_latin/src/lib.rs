@@ -1,51 +1,47 @@
-pub fn pig_latin(text: &str) -> String {
+pub fn pig_latin(word: &str) -> String {
     let vowels = "aeiouAEIOU";
-    let words: Vec<&str> = text.split(' ').collect();
-
-    let mut result = String::new();
-
-    for (i, word) in words.iter().enumerate() {
-        let mut new_word = String::new();
-
-        let mut chars = word.chars();
-        if let Some(first_char) = chars.next() {
-            if vowels.contains(first_char) {
-                new_word.push_str(&word);
-                new_word.push_str("ay");
-            } else {
-                let mut consonants = String::new();
-                consonants.push(first_char);
-
-                if consonants == "q" {
-                    if let Some(next_char) = chars.next() {
-                        if next_char == 'u' {
-                            consonants.push(next_char);
-                        }
-                    }
-                }
-
-                while let Some(char) = chars.next() {
-                    if vowels.contains(char) {
+    let mut chars = word.chars();
+    let first_char = chars.next().unwrap();
+    let mut rest = chars.as_str();
+    let mut pig_word = String::new();
+    if vowels.contains(first_char) {
+        pig_word.push_str(word);
+        pig_word.push_str("ay");
+    } else if rest.starts_with("qu") {
+        let rest = &chars.as_str().replace("qu", "");
+        pig_word.push_str(rest);
+        pig_word.push(first_char);
+        pig_word.push_str("quay");
+    } else {
+        let mut consonants = String::new();
+        consonants.push(first_char);
+        while let Some(c) = chars.next() {
+            if c == 'q' {
+                // print!("hi?");
+                if let Some(next_char) = chars.next() {
+                    if next_char == 'u' {
+                        consonants.push_str("qu");
+                        pig_word.push_str(rest);
+                        pig_word.push_str(&consonants);
+                        pig_word.push_str("ay");
                         break;
                     }
-                    consonants.push(char);
                 }
-
-                new_word.push_str(chars.as_str());
-                new_word.push_str(&consonants);
-                new_word.push_str("ay");
+            }
+            if !vowels.contains(c) {
+                consonants.push(c);
+            } else {
+                // print!("---{}---",rest);
+                // rest = chars.as_str();
+                pig_word.push_str(rest);
+                pig_word.push_str(&consonants);
+                pig_word.push_str("ay");
+                break;
             }
         }
-
-        if i > 0 {
-            result.push(' ');
-        }
-        result.push_str(&new_word);
     }
-
-    result
+    pig_word
 }
-
 #[cfg(test)]
 mod tests {
     use super::*;
