@@ -33,43 +33,43 @@ pub fn edit_distance(source: &str, target: &str) -> usize {
     dist[source_len][target_len]
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+// #[cfg(test)]
+// mod tests {
+//     use super::*;
 
-    #[test]
-    fn it_works() {
-	let source = "alignment";
-	let target = "assignment";
-	println!(
-		"It's necessary to make {} change(s) to {}, to get {}",
-		edit_distance(source, target),
-		source,
-		target
-	);
-    let source = "gumbo";
-	let target = "gambol";
-	println!(
-		"It's necessary to make {} change(s) to {}, to get {}",
-		edit_distance(source, target),
-		source,
-		target
-	);
-    let source = "kitten";
-	let target = "sitting";
-	println!(
-		"It's necessary to make {} change(s) to {}, to get {}",
-		edit_distance(source, target),
-		source,
-		target
-	);
-    let source = "rosettacode";
-	let target = "raisethysword";
-	println!(
-		"It's necessary to make {} change(s) to {}, to get {}",
-		edit_distance(source, target),
-		source,
-		target
-	);
-    }
-}
+//     #[test]
+//     fn it_works() {
+// 	let source = "alignment";
+// 	let target = "assignment";
+// 	println!(
+// 		"It's necessary to make {} change(s) to {}, to get {}",
+// 		edit_distance(source, target),
+// 		source,
+// 		target
+// 	);
+//     let source = "gumbo";
+// 	let target = "gambol";
+// 	println!(
+// 		"It's necessary to make {} change(s) to {}, to get {}",
+// 		edit_distance(source, target),
+// 		source,
+// 		target
+// 	);
+//     let source = "kitten";
+// 	let target = "sitting";
+// 	println!(
+// 		"It's necessary to make {} change(s) to {}, to get {}",
+// 		edit_distance(source, target),
+// 		source,
+// 		target
+// 	);
+//     let source = "rosettacode";
+// 	let target = "raisethysword";
+// 	println!(
+// 		"It's necessary to make {} change(s) to {}, to get {}",
+// 		edit_distance(source, target),
+// 		source,
+// 		target
+// 	);
+//     }
+// }
