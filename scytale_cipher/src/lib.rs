@@ -1,18 +1,16 @@
 pub fn scytale_cipher(message: String, i: u32) -> String {
     let len = message.len();
     let width = (len as f32 / i as f32).ceil() as usize;
-    let mut result = String::new();
-    for j in 0..width {
-        for k in 0..i {
-            let index = (k * width as u32) + j as u32;
-            if index < len as u32{
-                result.push(message.chars().nth(index as usize).unwrap());
-            } else {
-                result.push(' ');
+    let mut result = vec![vec![' '; width]; i as usize];
+    let mut message_chars = message.chars().peekable();
+    for row in 0..width {
+        for col in 0..i as usize {
+            if let Some(c) = message_chars.next() {
+                result[col][row] = c;
             }
         }
     }
-    result.trim().to_string()
+    result.iter().flatten().collect()
 }
 
 #[cfg(test)]
