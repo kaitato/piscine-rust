@@ -14,7 +14,7 @@ pub struct Worker {
     pub all_messages: RefCell<Vec<String>>,
 }
 impl Worker {
-    fn new(i: usize) -> Self {
+    pub fn new(i: usize) -> Self {
         Self {
             track_value: Rc::new(i),
             mapped_messages: RefCell::new(HashMap::new()),
