@@ -10,7 +10,7 @@ pub struct Player {
 }
 impl fmt::Display for Player {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{}\n{} {} {}\n{:?}", self.name, self.strength, self.score, self.money, self.weapons)
+        write!(f, "{}\nStrength: {}, Score: {}, Money: {}\n {:?}", self.name, self.strength, self.score, self.money, self.weapons)
 
     }
 }
