@@ -68,9 +68,9 @@ impl <T: Scalar<Item = T>> Matrix<T> {
 	}
 	pub fn zero(row: usize, col: usize) -> Matrix<T> {
         let mut new_vec: Vec<Vec<T>> = Vec::new();
-        for _ in 0..col {
+        for _ in 0..row {
             let mut new_row: Vec<T> = Vec::new();
-            for _ in 0..row {
+            for _ in 0..col {
                 new_row.push(T::zero());
             }
             new_vec.push(new_row);
