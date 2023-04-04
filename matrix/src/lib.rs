@@ -1,5 +1,4 @@
-use std::ops::{Index, IndexMut};
-
+// use std::ops::{Index, IndexMut};
 
 pub trait Scalar: Sized{
     type Item;
@@ -60,7 +59,7 @@ impl Scalar for f64 {
         1.
     }
 }
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct Matrix<T>(pub Vec<Vec<T>>);
 
 impl <T: Scalar<Item = T>> Matrix<T> {
