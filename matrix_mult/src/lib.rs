@@ -14,8 +14,8 @@ impl<T: Copy + Clone> Matrix<T> {
         self.0.len()
     }
 
-    pub fn row(&self, n: usize) -> &[T] {
-        &self.0[n]
+    pub fn row(&self, n: usize) -> Vec<T> {
+        self.0[n].clone()
     }
 
     pub fn col(&self, n: usize) -> Vec<T> {
