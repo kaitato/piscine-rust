@@ -1,4 +1,8 @@
 pub fn get_products(arr: Vec<usize>) -> Vec<usize> {
+    if arr.len() == 1 {
+        return arr;
+    }
+
     let mut products = vec![1; arr.len()];
 
     let mut product_so_far = 1;
@@ -15,6 +19,7 @@ pub fn get_products(arr: Vec<usize>) -> Vec<usize> {
 
     products
 }
+
 
 #[cfg(test)]
 mod tests {
