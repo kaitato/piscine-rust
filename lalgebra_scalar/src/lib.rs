@@ -1,28 +1,60 @@
-use std::ops::{Add, Sub, Mul, Div};
 
-pub trait Scalar: Add<Output=Self> + Sub<Output=Self> + Mul<Output=Self> + Div<Output=Self> + Copy + PartialEq + PartialOrd + std::fmt::Debug {
+pub trait Scalar: Sized{
     type Item;
     fn zero() -> Self::Item;
     fn one() -> Self::Item;
 }
-
-macro_rules! impl_scalar {
-    ($t:ty, $zero:expr, $one:expr) => {
-        impl Scalar for $t {
-            type Item = Self;
-            fn zero() -> Self::Item {
-                $zero
-            }
-            fn one() -> Self::Item {
-                $one
-            }
-        }
-    };
+impl Scalar for u32 {
+    type Item = u32;
+    fn zero() -> Self::Item {
+        0
+    }
+    fn one() -> Self::Item {
+        1
+    }
 }
-
-impl_scalar!(u32, 0, 1);
-impl_scalar!(u64, 0, 1);
-impl_scalar!(i32, 0, 1);
-impl_scalar!(i64, 0, 1);
-impl_scalar!(f32, 0.0, 1.0);
-impl_scalar!(f64, 0.0, 1.0);
+impl Scalar for u64 {
+    type Item = u64;
+    fn zero() -> Self::Item {
+        0
+    }
+    fn one() -> Self::Item {
+        1
+    }
+}
+impl Scalar for i32 {
+    type Item = i32;
+    fn zero() -> Self::Item {
+        0
+    }
+    fn one() -> Self::Item {
+        1
+    }
+}
+impl Scalar for i64 {
+    type Item = i64;
+    fn zero() -> Self::Item {
+        0
+    }
+    fn one() -> Self::Item {
+        1
+    }
+}
+impl Scalar for f32 {
+    type Item = f32;
+    fn zero() -> Self::Item {
+        0.
+    }
+    fn one() -> Self::Item {
+        1.
+    }
+}
+impl Scalar for f64 {
+    type Item = f64;
+    fn zero() -> Self::Item {
+        0.
+    }
+    fn one() -> Self::Item {
+        1.
+    }
+}

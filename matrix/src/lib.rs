@@ -1,5 +1,4 @@
 // use std::ops::{Index, IndexMut};
-
 pub trait Scalar: Sized{
     type Item;
     fn zero() -> Self::Item;
