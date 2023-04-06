@@ -4,6 +4,8 @@ pub struct Object {
     pub y: f32,
 }
 
+const  G: f32 = 9.8;
+
 #[derive(Debug, Clone, PartialEq)]
 pub struct ThrowObject {
     pub init_position: Object,
@@ -15,41 +17,42 @@ pub struct ThrowObject {
 
 impl ThrowObject {
     pub fn new(init_position: Object, init_velocity: Object) -> ThrowObject {
-        ThrowObject {
-            init_position: init_position.clone(),
-            init_velocity: init_velocity.clone(),
-            actual_position: init_position,
-            actual_velocity: init_velocity,
-            time: 0.0,
+        ThrowObject { 
+            init_position: init_position.clone(), 
+            init_velocity: init_velocity.clone(), 
+            actual_position: init_position, 
+            actual_velocity: init_velocity, 
+            time: 0.0, 
         }
     }
 }
 
 impl Iterator for ThrowObject {
     type Item = ThrowObject;
-
     fn next(&mut self) -> Option<Self::Item> {
-        let g = -9.81; // acceleration due to gravity in m/s^2
-        let t = 1.0; // time step in seconds
+        self.time += 1.0;
 
-        // Calculate the new position and velocity of the object
-        let new_x = self.actual_position.x + self.actual_velocity.x * t;
-        let new_y = self.actual_position.y + self.actual_velocity.y * t + 0.5 * g * t * t;
-        let new_vx = self.actual_velocity.x;
-        let new_vy = self.actual_velocity.y + g * t;
+        self.actual_position.x = self.init_position.x + 
+            self.init_velocity.x * self.time;
+        self.actual_position.y = self.init_position.y + self.init_velocity.y * self.time - 
+            0.5 * G * self.time * self.time;
+        
+        self.actual_velocity.y = self.init_velocity.y - G * self.time;
 
-        // Update the ThrowObject with the new values
-        self.actual_position = Object { x: new_x, y: new_y };
-        self.actual_velocity = Object { x: new_vx, y: new_vy };
-        self.time += t;
+        self.actual_position.x = round(self.actual_position.x, 10.0);
+        self.actual_position.y = round(self.actual_position.y, 10.0);
+        self.actual_velocity.y = round(self.actual_velocity.y, 10.0);
 
-        // Check if the object has hit the ground
-        if self.actual_position.y <= 0.0 {
-            None
-        } else {
-            Some(self.clone())
+        if self.actual_position.y <= 0.0{
+            return None;
         }
+
+        return Some((*self).clone());
     }
+}
+
+pub fn round(num: f32, precision: f32) -> f32{
+    return (num * precision).round() / precision;
 }
 
 
