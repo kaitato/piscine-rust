@@ -1,25 +1,27 @@
 pub fn get_products(arr: Vec<usize>) -> Vec<usize> {
-    if arr.len() == 1 {
-        return arr;
+    let mut new_vec : Vec<usize> = Vec::new();
+    if arr.len() <= 1{
+        return vec![]
     }
-
-    let mut products = vec![1; arr.len()];
-
-    let mut product_so_far = 1;
-    for i in 0..arr.len() {
-        products[i] *= product_so_far;
-        product_so_far *= arr[i];
-    }
-
-    product_so_far = 1;
-    for i in (0..arr.len()).rev() {
-        products[i] *= product_so_far;
-        product_so_far *= arr[i];
-    }
-
-    products
+    for (i,nums) in arr.iter().enumerate(){
+        let mut index = 0;
+        let mut sum = 1;
+        if arr[i].clone() == *nums{
+            // println!("{nums}");
+            while index < arr.len(){
+                if index != i{
+                    sum= (sum) * arr[index];
+                    print!(" {:} multiplied\n", arr[index]);
+                    print!(" {sum} this is total.");
+                }
+                index += 1
+            }
+            println!("\nadded.");
+            new_vec.push(sum);
+        }
+    };
+    new_vec
 }
-
 
 #[cfg(test)]
 mod tests {
